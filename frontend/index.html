@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>VaaniPlan — Voice-First AI Daily Planning Assistant</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    :root {
+      --bg: #f6f1ea;
+      --card: rgba(255, 255, 255, 0.92);
+      --primary: #8a5a1f;
+      --primary-dark: #5c3b12;
+      --muted: #6f5f4b;
+      --border: #e2d6c6;
+    }
+
+    * {
+      box-sizing: border-box;
+      font-family: "Inter", system-ui, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--primary-dark);
+    }
+
+    /* ---------------- HEADER ---------------- */
+    header {
+      padding: 32px 64px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 36px;
+      font-weight: 800;
+    }
+
+    header p {
+      margin-top: 10px;
+      font-size: 16px;
+      color: var(--muted);
+      max-width: 760px;
+    }
+
+    .profile {
+      text-align: right;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .profile strong {
+      font-weight: 700;
+      font-size: 15px;
+      color: var(--primary-dark);
+    }
+
+    /* ---------------- MAIN (LOCKED) ---------------- */
+    main {
+      max-width: 1200px;
+      margin: 60px auto;
+      padding: 0 40px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: 18px;
+      padding: 36px;
+      border: 1px solid var(--border);
+    }
+
+    .card h2 {
+      margin-top: 0;
+      font-size: 22px;
+    }
+
+    .card p {
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    /* ---------------- VOICE INPUT ---------------- */
+    .mic-btn {
+      margin-top: 24px;
+      padding: 16px 28px;
+      border-radius: 14px;
+      border: none;
+      background: var(--primary);
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .mic-btn.listening {
+      background: #4f7d3a;
+    }
+
+    .status {
+      margin-top: 10px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    textarea {
+      width: 100%;
+      margin-top: 20px;
+      height: 120px;
+      padding: 14px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      font-size: 15px;
+      resize: none;
+    }
+
+    .generate-btn {
+      margin-top: 18px;
+      padding: 14px 26px;
+      border-radius: 14px;
+      border: none;
+      background: var(--primary-dark);
+      color: white;
+      font-size: 15px;
+      cursor: pointer;
+    }
+
+    /* ---------------- OUTPUT ---------------- */
+    .output {
+      background: rgba(246, 239, 229, 0.9);
+      border-radius: 14px;
+      padding: 22px;
+      font-size: 15px;
+      line-height: 1.7;
+      min-height: 200px;
+      white-space: pre-line;
+    }
+
+    /* ---------------- INFO SECTIONS ---------------- */
+    .info-section {
+      max-width: 1100px;
+      margin: 80px auto;
+      padding: 0 40px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+
+    .info-card {
+      background: rgba(255, 255, 255, 0.88);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 26px;
+      text-align: center;
+    }
+
+    .info-card h3 {
+      margin-top: 0;
+      font-size: 18px;
+      color: var(--primary-dark);
+    }
+
+    .info-card p,
+    .info-card li {
+      font-size: 14.5px;
+      color: var(--muted);
+      line-height: 1.6;
+      list-style: none;
+      padding: 0;
+    }
+
+    .info-card ul {
+      padding-left: 0;
+      margin: 0;
+    }
+
+    /* ---------------- RESPONSIVE ---------------- */
+    @media (max-width: 900px) {
+      main,
+      .info-section {
+        grid-template-columns: 1fr;
+      }
+
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+      }
+
+      .profile {
+        text-align: left;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div>
+    <h1>VaaniPlan — A Voice-First AI Daily Planning Assistant </h1>
+    <p>
+      Prototype submission for the <strong>Unleash LLM Innovation Challenge</strong>
+      under the <strong>YuvAI Initiative</strong>, enabling structured daily planning
+      using natural voice.
+    </p>
+  </div>
+
+  <div class="profile">
+    <strong>Kaushik Yellanki</strong><br />
+    <strong>TEAM-MJEEYWAO-01DCCB</strong><br />
+    <strong>kaushikyellanki@gmail.com</strong>
+  </div>
+</header>
+
+<main>
+
+  <!-- LEFT: VOICE INPUT (UNCHANGED) -->
+  <section class="card">
+    <h2>🎙️ Plan Your Day</h2>
+    <p>Speak naturally. Review or edit your text before generating the plan.</p>
+
+    <button id="micBtn" class="mic-btn">Start Speaking</button>
+    <div id="status" class="status">Idle</div>
+
+    <textarea id="textBox"></textarea>
+
+    <button class="generate-btn" onclick="generatePlan()">
+      Generate Plan
+    </button>
+  </section>
+
+  <!-- RIGHT: OUTPUT (UNCHANGED) -->
+  <section class="card">
+    <h2>🗓️ Vaani’s Plan</h2>
+    <p>Chronologically ordered daily schedule generated by AI.</p>
+
+    <div id="output" class="output">
+      Waiting for voice input…
+    </div>
+  </section>
+
+</main>
+
+<!-- INFO SECTIONS -->
+<section class="info-section">
+
+  <div class="info-card">
+    <h3>What is VaaniPlan?</h3>
+    <p>
+      VaaniPlan is a voice-first AI daily planning assistant that converts natural
+      spoken thoughts into a clear, structured timetable — eliminating manual planning.
+    </p>
+  </div>
+
+  <div class="info-card">
+    <h3>Why VaaniPlan?</h3>
+    <p>
+      Planning friction prevents consistency. VaaniPlan removes typing, structuring,
+      and prioritization barriers by letting users plan naturally through voice.
+    </p>
+  </div>
+
+  <div class="info-card">
+    <h3>How to Use VaaniPlan</h3>
+    <ul>
+      <li>Click <strong>Start Speaking</strong></li>
+      <li>Review or edit the text</li>
+      <li>Click <strong>Generate Plan</strong></li>
+      <li>View your structured schedule</li>
+    </ul>
+  </div>
+
+</section>
+
+<script>
+  const SpeechRecognition =
+    window.SpeechRecognition || window.webkitSpeechRecognition;
+
+  const recognition = new SpeechRecognition();
+  recognition.lang = "en-IN";
+  recognition.continuous = false;
+
+  const micBtn = document.getElementById("micBtn");
+  const statusText = document.getElementById("status");
+  const textBox = document.getElementById("textBox");
+  const output = document.getElementById("output");
+
+  micBtn.onclick = () => {
+    recognition.start();
+    micBtn.classList.add("listening");
+    micBtn.textContent = "Listening…";
+    statusText.textContent = "Listening to your voice…";
+  };
+
+  recognition.onresult = (event) => {
+    textBox.value = event.results[0][0].transcript;
+  };
+
+  recognition.onend = () => {
+    micBtn.classList.remove("listening");
+    micBtn.textContent = "Start Speaking";
+    statusText.textContent = "Voice captured. You may edit the text.";
+  };
+
+  async function generatePlan() {
+    if (!textBox.value.trim()) {
+      output.textContent = "Please speak your plan first.";
+      return;
+    }
+
+    output.textContent = "Generating plan…";
+
+    try {
+      const res = await fetch(
+        `http://127.0.0.1:8000/plan?text=${encodeURIComponent(textBox.value)}`
+      );
+      const data = await res.json();
+      output.textContent = data.plan;
+    } catch (err) {
+      output.textContent = "AI is taking a short break. Please try again.";
+    }
+  }
+</script>
+
+</body>
+</html>

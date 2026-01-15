@@ -10,11 +10,15 @@ import tempfile
 app = FastAPI()
 
 # -------------------------
-# ENABLE CORS (REQUIRED FOR FRONTEND)
+# ENABLE CORS (FRONTEND ↔ BACKEND)
 # -------------------------
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],          # allow browser frontend
+    allow_origins=[
+        "https://yellankikaushik.github.io",
+        "http://localhost:5500",
+        "http://127.0.0.1:5500"
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

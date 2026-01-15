@@ -73,9 +73,4 @@ Team ID: TEAM-MJEEYWAO-01DCCB
 Unleash LLM Innovation Challenge – YuvAI Initiative
 
 
-## 👤 Author
-
-**Kaushik Yellanki**  
-Team ID: TEAM-MJEEYWAO-01DCCB  
-Unleash LLM Innovation Challenge – YuvAI Initiative
 

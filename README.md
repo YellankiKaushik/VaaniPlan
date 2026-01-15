@@ -1,76 +1,113 @@
-# 🎙️ VaaniPlan — Voice-First AI Daily Planner
+# 🎙️ VaaniPlan — Voice-First AI Daily Planning Assistant
 
-VaaniPlan is a voice-first AI daily planning assistant that converts natural spoken thoughts into a clear, structured daily timetable.  
-This project is a **prototype submission** for the **Unleash LLM Innovation Challenge** under the **YuvAI Initiative**.
+VaaniPlan is a **voice-first AI daily planning assistant** that converts natural spoken thoughts into a clear, structured daily timetable.
+
+This project is built as a **prototype submission for the Unleash LLM Innovation Challenge** under the **YuvAI Initiative**, demonstrating how Large Language Models (LLMs) can improve everyday productivity through natural voice interaction.
+
+---
 
 ## 🔗 Live Demo
 
-👉 https://yellankikaushik.github.io/VaaniPlan/
+👉 **Frontend (GitHub Pages)**  
+https://yellankikaushik.github.io/VaaniPlan/
 
-## ❓ Problem Statement
+👉 **Backend (FastAPI API)**  
+https://vaaniplan-backend.onrender.com/
 
-Many students, professionals, and learners struggle with daily planning because:
-- Typing tasks is time-consuming
-- Structuring schedules requires effort
-- Traditional planners lack flexibility
+---
 
-This leads to inconsistent planning and reduced productivity.
+## 🚩 Problem Statement
+
+Many people struggle to plan their day effectively due to the friction of typing, structuring tasks, and prioritizing activities.  
+This problem is especially common among students, professionals, and learners managing dynamic daily schedules.
+
+---
 
 ## 💡 Solution Overview
 
-VaaniPlan enables users to plan their day using **natural voice input**.
-Users simply describe their day, and an AI system converts this unstructured speech into a clean, time-based daily plan.
+VaaniPlan removes planning friction by allowing users to simply **speak their day** in natural language.  
+An AI language model understands the intent, organizes tasks chronologically, and generates a time-based daily plan.
 
-## 🤖 LLM Utilization
+---
 
-An AI Language Model (LLM) is used as the core intelligence of VaaniPlan.
+## ⚙️ How It Works
 
-The LLM:
-- Understands user intent from natural language
-- Prioritizes tasks logically
-- Converts unstructured speech into a structured timetable
+1. User clicks **Start Speaking** and describes their day naturally
+2. Browser captures voice and converts it to text
+3. Text is sent to the backend API
+4. An LLM processes the input and generates a structured timetable
+5. The plan is displayed instantly to the user
 
-Without an LLM, this level of semantic understanding and planning would not be possible.
+---
 
-## 🏗️ System Architecture
+## 🧱 System Architecture
 
-The system follows a clean separation of responsibilities:
+**Frontend**
+- HTML, CSS, JavaScript
+- Browser-based Speech Recognition (Web Speech API)
+- Hosted via GitHub Pages
 
-- **Frontend (Browser)**  
-  Captures voice input using the Web Speech API and sends text to the backend
+**Backend**
+- FastAPI (Python)
+- REST API for plan generation
+- Hosted on Render
 
-- **Backend (FastAPI)**  
-  Processes input and calls the LLM to generate a structured plan
+**AI Layer**
+- LLM processes natural language input
+- Generates structured daily schedules
 
-- **LLM Layer**  
-  Converts raw language into a chronological daily schedule
+---
 
-## 🎓 Impact & Track Alignment
+## 🧠 LLM Usage (Core Innovation)
 
-VaaniPlan aligns with the **Education & Skills** track by:
-- Improving productivity through planning
-- Supporting students and professionals
-- Making AI accessible through voice-first interaction
+- **Current Model:** OpenAI GPT-based model
+- **Role of LLM:**  
+  - Understands unstructured natural language  
+  - Infers intent and priorities  
+  - Converts speech-based input into a structured timetable  
 
-## 🌍 Mission Alignment
+> ⚠️ The LLM is **not optional** in this system — it is the core intelligence layer.
 
-VaaniPlan contributes to the YuvAI mission by:
-- Enabling AI accessibility through voice
-- Reducing barriers to digital planning
-- Encouraging skill development using AI tools
+### Model-Agnostic Design
+While demonstrated with OpenAI for prototyping, the architecture is **model-agnostic** and can be adapted to open-source LLMs such as LLaMA or Mistral to align with open innovation requirements.
 
-## 🔮 Future Scope
+---
 
-- Support for regional languages
-- Integration with open-source LLMs
-- Mobile-friendly interface
-- Habit and routine recommendations
+## 🛠️ Tech Stack
 
-## 👤 Author
+- Frontend: HTML, CSS, JavaScript
+- Backend: FastAPI (Python)
+- AI: Large Language Models (LLMs)
+- Hosting: GitHub Pages (Frontend), Render (Backend)
+
+---
+
+## 🧪 Prototype Status
+
+- This is a **working prototype**
+- No authentication or database
+- Designed for demonstration and evaluation
+- API usage is limited and intended for demo purposes
+
+---
+
+## 🚀 Future Scope
+
+- Replace API-based LLM with fully open-source models
+- Add multilingual voice support
+- Improve plan customization and refinement
+- Scale for educational and workforce planning use cases
+
+---
+
+## 👤 Author & Team
 
 **Kaushik Yellanki**  
 Team ID: TEAM-MJEEYWAO-01DCCB  
-Unleash LLM Innovation Challenge – YuvAI Initiative
+Email: kaushikyellanki@gmail.com
 
+---
 
+## 🏁 Closing Note
 
+VaaniPlan contributes to the **YuvAI mission** by making AI more accessible through voice-first interaction and demonstrating responsible, practical use of LLMs for real-world productivity.
